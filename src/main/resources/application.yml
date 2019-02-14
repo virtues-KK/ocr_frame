@@ -1,0 +1,44 @@
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.1.142/demodata?useSSL=false&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root
+    drive rClassName: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+  data:
+    mongodb:
+      database: ocr_jiangxi
+      host: 127.0.0.1
+      port: 27017
+    web:
+      pageable:
+        one-indexed-parameters: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 5000
+  resources:
+    static-locations: file:${ocr.imagesPath}
+logging:
+  level:
+    com.fdcompany.ocr: DEBUG
+    org.springframework.data.mongodb.core: DEBUG
+ocr:
+  # 判定这个字符可能为错别字的阀值
+  lowProbabilityThresholdValue: 80
+  # 会被自动纠错的概率阀值
+  autoCorrectThresholdValue: 50
+  # 剪切图片保存在本地的路径
+  imagesPath: C:\ocr-images\
+  # redis错别字库的key前缀
+  redisTyposPrefix: typos-
+  # redis误判字库的集合的key
+  redisMisjudgmentKey: misjudgment
