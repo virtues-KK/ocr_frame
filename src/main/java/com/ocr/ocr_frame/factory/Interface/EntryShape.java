@@ -5,5 +5,5 @@ import com.ocr.ocr_frame.mapping.Entry;
 import java.util.List;
 
 public interface EntryShape {
-    List<Entry> entryAnalysis(String content);
+    List<List<Entry>> entryAnalysis(String content,Parser parser);
 }
